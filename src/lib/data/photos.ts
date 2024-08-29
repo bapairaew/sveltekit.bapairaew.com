@@ -1,6 +1,6 @@
 import exifr from 'exifr';
 import { globby } from 'globby';
-import { parse } from 'path';
+import path, { parse } from 'path';
 import sharp from 'sharp';
 
 export type Photo = {
@@ -24,8 +24,7 @@ export const getPhotos = async (slug?: string) => {
 };
 
 export const getPhotosPath = (slug = '*') => {
-	// NOTE: don't use process.cwd() here, otherwise vercel will pick them up for their serverless function
-	return `static/photos/${slug}.jpeg`;
+	return path.join(process.cwd(), process.env.VERCEL ? 'static' : '', `photos/${slug}.mdx`);
 };
 
 export const getPhotoData = async (path: string): Promise<Photo> => {
