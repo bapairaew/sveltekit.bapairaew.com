@@ -13,7 +13,6 @@
 	let imageElement: HTMLImageElement;
 
 	function onload() {
-		console.log(src);
 		loaded = true;
 		imageElement.src = src;
 	}

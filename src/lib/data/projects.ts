@@ -112,7 +112,7 @@ const parseProject = (project: GrayMatterFileWithPath): Project => {
 };
 
 const getProjectsPath = (slug = '*') => {
-	return path.join(process.cwd(), process.env.VERCEL ? '' : 'static', `projects/${slug}.mdx`);
+	return path.join(process.cwd(), `static/projects/${slug}.mdx`);
 };
 
 export const getProjects = async (slug?: string) => {

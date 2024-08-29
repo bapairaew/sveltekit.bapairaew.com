@@ -24,7 +24,7 @@ export const getPhotos = async (slug?: string) => {
 };
 
 export const getPhotosPath = (slug = '*') => {
-	return path.join(process.cwd(), process.env.VERCEL ? '' : 'static', `photos/${slug}.jpeg`);
+	return path.join(process.cwd(), `static/photos/${slug}.jpeg`);
 };
 
 export const getPhotoData = async (path: string): Promise<Photo> => {
