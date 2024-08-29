@@ -1,6 +1,5 @@
 import path from 'path';
 import { type GrayMatterFileWithPath, getMarkdownFrontMatter } from './markdown';
-import postsCache from '../../../.cache/posts.json';
 
 export type Post = {
 	slug: string;
@@ -29,7 +28,6 @@ const getPostsPath = (slug = '*') => {
 };
 
 export const getPosts = async (slug?: string) => {
-	if (postsCache) return postsCache as Post[];
 	const pattern = getPostsPath(slug);
 	const posts = (await getMarkdownFrontMatter(pattern))
 		.map(parsePost)

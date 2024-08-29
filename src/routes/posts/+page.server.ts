@@ -1,4 +1,4 @@
-import { getPosts } from '$lib/data/posts';
+import { getPosts } from '$lib/data/cache';
 
 export const load = async () => {
 	const posts = await getPosts();

@@ -1,6 +1,5 @@
 import { type GrayMatterFileWithPath, getMarkdownFrontMatter } from './markdown';
 import path from 'path';
-import projectsCache from '../../../.cache/projects.json';
 
 export type Project = {
 	slug: string;
@@ -117,7 +116,6 @@ const getProjectsPath = (slug = '*') => {
 };
 
 export const getProjects = async (slug?: string) => {
-	if (projectsCache) return projectsCache as Project[];
 	const pattern = getProjectsPath(slug);
 	const projects = (await getMarkdownFrontMatter(pattern)).map(parseProject).reverse();
 	return projects as Project[];

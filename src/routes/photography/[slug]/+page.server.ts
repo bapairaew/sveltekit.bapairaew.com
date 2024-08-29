@@ -1,4 +1,4 @@
-import { getPhotos } from '$lib/data/photos';
+import { getPhotos } from '$lib/data/cache';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
