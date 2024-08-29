@@ -1,7 +1,13 @@
 <script>
 	import '../app.css';
 	import RootNavigation from '$lib/components/navigations/RootNavigation.svelte';
+	import { navigating, page } from '$app/stores';
+	import LoadingNavigation from '$lib/components/navigations/LoadingNavigation.svelte';
 </script>
+
+{#if $navigating}
+	<LoadingNavigation />
+{/if}
 
 <RootNavigation />
 <slot />
