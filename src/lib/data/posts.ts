@@ -24,7 +24,7 @@ export const parsePost = (post: GrayMatterFileWithPath): Post => {
 };
 
 const getPostsPath = (slug = '*') => {
-	return path.join(process.cwd(), process.env.VERCEL ? 'static' : '', `posts/${slug}.mdx`);
+	return path.join(process.cwd(), process.env.VERCEL ? '' : 'static', `posts/${slug}.mdx`);
 };
 
 export const getPosts = async (slug?: string) => {
