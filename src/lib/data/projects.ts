@@ -1,5 +1,6 @@
 import { type GrayMatterFileWithPath, getMarkdownFrontMatter } from './markdown';
 import path from 'path';
+import projectsCache from '../../../.cache/projects.json';
 
 export type Project = {
 	slug: string;
@@ -116,30 +117,8 @@ const getProjectsPath = (slug = '*') => {
 };
 
 export const getProjects = async (slug?: string) => {
+	if (projectsCache) return projectsCache as Project[];
 	const pattern = getProjectsPath(slug);
 	const projects = (await getMarkdownFrontMatter(pattern)).map(parseProject).reverse();
 	return projects as Project[];
-};
-
-export const getTools = (projects: Project[]) => {
-	const tools = projects
-		.reduce(
-			(tools, w) => {
-				for (const tool of w.tags.filter((t) =>
-					['Framework', 'Language', 'Platform', 'Database'].includes(t.type)
-				)) {
-					const matched = tools.find((t) => t.text === tool.text);
-					if (matched) {
-						matched.count++;
-					} else {
-						tools.push({ text: tool.text, count: 1 });
-					}
-				}
-				return tools;
-			},
-			[] as { text: string; count: number }[]
-		)
-		.sort((a, b) => (a.count > b.count ? -1 : 1));
-
-	return tools;
 };

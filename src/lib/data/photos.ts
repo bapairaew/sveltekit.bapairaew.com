@@ -2,6 +2,7 @@ import exifr from 'exifr';
 import { globby } from 'globby';
 import path, { parse } from 'path';
 import sharp from 'sharp';
+import photosCache from '../../../.cache/photos.json';
 
 export type Photo = {
 	slug: string;
@@ -12,22 +13,23 @@ export type Photo = {
 	iso: number;
 	focalLength: number;
 	exposureTime: number;
-	width: string;
-	height: string;
+	width: string | number;
+	height: string | number;
 	blurDataURL?: string;
 };
 
 export const getPhotos = async (slug?: string) => {
+	if (photosCache) return photosCache as Photo[];
 	const slugs = await globby(getPhotosPath(slug));
 	const data = await Promise.all(slugs.map((slug) => getPhotoData(slug)));
-	return data.reverse();
+	return data.reverse() as Photo[];
 };
 
-export const getPhotosPath = (slug = '*') => {
+const getPhotosPath = (slug = '*') => {
 	return path.join(process.cwd(), `static/photos/${slug}.jpeg`);
 };
 
-export const getPhotoData = async (path: string): Promise<Photo> => {
+const getPhotoData = async (path: string): Promise<Photo> => {
 	const [exifrData, blurDataURL] = await Promise.all([exifr.parse(path), getBlurDataURL(path)]);
 	const slug = parse(path).name;
 	const placeParts = exifrData.ImageDescription?.split(', ');
