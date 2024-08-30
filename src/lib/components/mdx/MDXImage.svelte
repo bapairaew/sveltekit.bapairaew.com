@@ -1,5 +1,6 @@
 <script lang="ts">
 	import FilledImage from '$lib/components/images/FilledImage.svelte';
+	import { getRemoteImagePath } from '$lib/data/image';
 
 	export let src: string;
 	export let alt: string;
@@ -8,6 +9,6 @@
 </script>
 
 <figure>
-	<FilledImage {src} {alt} placeholder={defaultPlaceholderImage} />
+	<FilledImage src={getRemoteImagePath(src)} {alt} placeholder={defaultPlaceholderImage} />
 	<figcaption class="text-center">{alt}</figcaption>
 </figure>
