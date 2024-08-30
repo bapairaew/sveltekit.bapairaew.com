@@ -1,5 +1,4 @@
-import path from 'path';
-import { type GrayMatterFileWithPath, getMarkdownFrontMatter } from './markdown';
+import { getURL } from './api';
 
 export type Post = {
 	slug: string;
@@ -11,27 +10,8 @@ export type Post = {
 	content: string;
 };
 
-const parsePost = (post: GrayMatterFileWithPath): Post => {
-	return {
-		slug: path.parse(post.path).name,
-		title: post.data.title,
-		description: post.data.description,
-		keywords: post.data.keywords,
-		publishedTime: post.data.publishedTime,
-		modifiedTime: post.data.modifiedTime,
-		content: post.content
-	};
-};
-
-const getPostsPath = (slug = '*') => {
-	return path.join(process.cwd(), `static/posts/${slug}.mdx`);
-};
-
 export const getPosts = async (slug?: string) => {
-	const pattern = getPostsPath(slug);
-	const posts = (await getMarkdownFrontMatter(pattern))
-		.map(parsePost)
-		.filter((x) => x.publishedTime)
-		.reverse();
-	return posts as Post[];
+	const res = await fetch(getURL('posts', slug));
+	const data: Post[] = await res.json();
+	return data;
 };

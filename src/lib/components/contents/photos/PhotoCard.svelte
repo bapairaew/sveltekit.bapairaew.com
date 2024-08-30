@@ -5,6 +5,7 @@
 	import type { Photo } from '$lib/data/photos';
 	import dateformat from 'dateformat';
 	import PhotoContent from './PhotoContent.svelte';
+	import { getRemoteImagePath } from '$lib/data/image';
 	export let photo: Photo;
 </script>
 
@@ -12,7 +13,7 @@
 	<FilledImage
 		className="object-cover"
 		alt={photo.place}
-		src={`/photos/${photo.slug}.jpeg`}
+		src={getRemoteImagePath(`/photos/${photo.slug}.jpeg`)}
 		placeholder={photo.blurDataURL}
 	/>
 	<div class="p-2">

@@ -1,4 +1,6 @@
-import { getPhotos, getPosts, getProjects } from '$lib/data/cache';
+import { getPhotos } from '$lib/data/photos';
+import { getPosts } from '$lib/data/posts';
+import { getProjects } from '$lib/data/projects';
 
 export const load = async () => {
 	return {

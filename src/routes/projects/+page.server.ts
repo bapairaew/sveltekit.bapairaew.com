@@ -1,4 +1,4 @@
-import { getProjects } from '$lib/data/cache';
+import { getProjects } from '$lib/data/projects';
 
 export const load = async () => {
 	const projects = await getProjects();

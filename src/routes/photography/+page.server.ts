@@ -1,4 +1,4 @@
-import { getPhotos } from '$lib/data/cache';
+import { getPhotos } from '$lib/data/photos';
 
 export const load = async () => {
 	const photos = await getPhotos();
