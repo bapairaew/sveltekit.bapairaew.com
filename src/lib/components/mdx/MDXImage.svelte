@@ -9,6 +9,11 @@
 </script>
 
 <figure>
-	<FilledImage src={getRemoteImagePath(src)} {alt} placeholder={defaultPlaceholderImage} />
+	<FilledImage
+		class="object-contain"
+		src={getRemoteImagePath(src)}
+		{alt}
+		placeholder={defaultPlaceholderImage}
+	/>
 	<figcaption class="text-center">{alt}</figcaption>
 </figure>
