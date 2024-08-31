@@ -18,6 +18,7 @@
 	}
 </script>
 
+<!-- Make full image appear only when it is fully loaded instead of showing ugly default loading progress -->
 <div class={clsx('overflow-hidden flex items-center', rest.class)}>
 	<img
 		bind:this={imageElement}
