@@ -9,3 +9,5 @@ export const load = async () => {
 		photos: getPhotos().then((photos) => photos.slice(0, 8))
 	};
 };
+
+export const prerender = true;
